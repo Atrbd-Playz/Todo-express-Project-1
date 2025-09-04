@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager | Backend Project-1</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-zinc-800">
+    <div class="main w-full flex justify-between">
+      <div class="flex flex-row justify-between w-[100%] flex-wrap p-8 m-6 text-gray-50">
+        <div class="flex-1 mr-[2rem] text-justify">
+          <a href="/" class="text-xl text-blue-400 mb-10">Back to Home</a>
+          <h1 class="text-4xl text-orange-300 mt-8"><%= `${filename.split('_').join(' ')}` %></h1>
+          <p class="text-xl mt-7"><%= `${data}` %></p>
+        </div>
+        <div >
+          <a href="/edit/<%=`${filename} `%>" class="inline-block w-[100%] bg-zinc-600 mb-5 text-center py-2 rounded-md">Edit</a>
+          <form action="/delete/<%=`${filename}`  %>" method="post" class="w-[100%] inline-block">
+            <button id="deleteButton" class="inline-block w-[100%] bg-rose-500 mb-5 text-center py-2 rounded-md" type="submit" name="confirm">Delete</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementById('deleteButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission
+    
+        // Get the button value
+        const buttonValue = this.value;
+    
+        // Perform your confirmation logic
+        const confirmation = confirm("Are you sure you want to delete this task?");
+        if (confirmation) {
+          // If confirmed, submit the form
+          this.form.submit();
+        }
+      });
+    </script>
+  </body>
+</html>
